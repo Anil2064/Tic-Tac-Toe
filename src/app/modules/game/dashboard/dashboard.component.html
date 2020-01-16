@@ -1,0 +1,31 @@
+
+
+<h1 class="game-text">Player Turn {{playerTurn == 1 ? 'X' : 'O'}}</h1>
+<button class="reset-btn" (click)="resetGame()">Reset Game</button>
+
+
+
+
+<h1>Tic Tac Toe</h1>
+<table class="player-mark">
+  <tr>
+    <td (click)="handleClick(0)" class="">{{playerMarkTypes[gridValue[0]]}}</td>
+    <td class="vert" (click)="handleClick(1)">{{playerMarkTypes[gridValue[1]]}}</td>
+    <td (click)="handleClick(2)">{{playerMarkTypes[gridValue[2]]}}</td>
+  </tr>
+  <tr>
+    <td class="hori" (click)="handleClick(3)">{{playerMarkTypes[gridValue[3]]}}</td>
+    <td class="vert hori" (click)="handleClick(4)">{{playerMarkTypes[gridValue[4]]}}</td>
+    <td class="hori" (click)="handleClick(5)">{{playerMarkTypes[gridValue[5]]}}</td>
+  </tr>
+  <tr>
+    <td (click)="handleClick(6)">{{playerMarkTypes[gridValue[6]]}}</td>
+    <td class="vert" (click)="handleClick(7)">{{playerMarkTypes[gridValue[7]]}}</td>
+    <td (click)="handleClick(8)">{{playerMarkTypes[gridValue[8]]}}</td>
+  </tr>
+</table>
+
+<div class="game-text" *ngIf="isWon">{{playerWon == 1 ? 'X' : 'O'}} has won, press reset to play again</div>
+
+<div class="game-text" *ngIf="isDraw">It's a Draw</div>
+
