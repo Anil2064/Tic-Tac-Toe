@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   isDraw: boolean = false;
   isWon: boolean = false;
   
+  //Array to save grid values
   private gridValue = [];
 
   private playerTurn = 1;
@@ -47,21 +48,22 @@ export class DashboardComponent implements OnInit {
   resetGame(){
     this.isDraw = false;
     this.isWon = false;
+    this.playerTurn = 1;
     this.gridValue = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   }
 
   /**
    * To check if we have a winner
-   * @param playerMark if X or 0
+   * @param playerMark String 'X' or 'O'
    */
-  isWinner(playerMark){
+  isWinner(playerMark, gridArr){
     let emptyCount = 0;
     for(let i=0;i<9;i++){
       if(this.gridValue[i] == 0) emptyCount++;
     }
 
-    for(let i=0;i<8;i++){
-      if(this.gridValue[this.win[i][0]] == playerMark && this.gridValue[this.win[i][1]] == playerMark && this.gridValue[this.win[i][2]] == playerMark){
+    for(let i=0;i<gridArr.length;i++){
+      if(this.gridValue[this.win[gridArr[i]][0]] == playerMark && this.gridValue[this.win[gridArr[i]][1]] == playerMark && this.gridValue[this.win[gridArr[i]][2]] == playerMark){
         console.log('true');
         this.isWon = true;
         this.playerWon = playerMark;
@@ -81,16 +83,16 @@ export class DashboardComponent implements OnInit {
    * To handle click
    * @param gridNum Grid number of game
    */
-  handleClick(gridNum){
+  handleClick(gridNum, gridArr){
     if((!this.isWon) && this.gridValue[gridNum] == 0){
       if(this.playerTurn == 1){ //for X
         this.gridValue[gridNum] = 1;
-        this.isWinner(1);
+        this.isWinner(1, gridArr);
         this.playerTurn = 2
       }
       else{                      // for O
         this.gridValue[gridNum] = 2;
-        this.isWinner(2);
+        this.isWinner(2, gridArr);
         this.playerTurn = 1;
       }
     }

@@ -9,19 +9,19 @@
 <h1>Tic Tac Toe</h1>
 <table class="player-mark">
   <tr>
-    <td (click)="handleClick(0)" class="">{{playerMarkTypes[gridValue[0]]}}</td>
-    <td class="vert" (click)="handleClick(1)">{{playerMarkTypes[gridValue[1]]}}</td>
-    <td (click)="handleClick(2)">{{playerMarkTypes[gridValue[2]]}}</td>
+    <td (click)="handleClick(0, [0, 3, 6])" class="">{{playerMarkTypes[gridValue[0]]}}</td>
+    <td class="vert" (click)="handleClick(1, [0, 4])">{{playerMarkTypes[gridValue[1]]}}</td>
+    <td (click)="handleClick(2, [0, 5, 7])">{{playerMarkTypes[gridValue[2]]}}</td>
   </tr>
   <tr>
-    <td class="hori" (click)="handleClick(3)">{{playerMarkTypes[gridValue[3]]}}</td>
-    <td class="vert hori" (click)="handleClick(4)">{{playerMarkTypes[gridValue[4]]}}</td>
-    <td class="hori" (click)="handleClick(5)">{{playerMarkTypes[gridValue[5]]}}</td>
+    <td class="hori" (click)="handleClick(3, [1, 3])">{{playerMarkTypes[gridValue[3]]}}</td>
+    <td class="vert hori" (click)="handleClick(4, [1, 4, 6, 7])">{{playerMarkTypes[gridValue[4]]}}</td>
+    <td class="hori" (click)="handleClick(5, [1, 5])">{{playerMarkTypes[gridValue[5]]}}</td>
   </tr>
   <tr>
-    <td (click)="handleClick(6)">{{playerMarkTypes[gridValue[6]]}}</td>
-    <td class="vert" (click)="handleClick(7)">{{playerMarkTypes[gridValue[7]]}}</td>
-    <td (click)="handleClick(8)">{{playerMarkTypes[gridValue[8]]}}</td>
+    <td (click)="handleClick(6, [2, 3, 7])">{{playerMarkTypes[gridValue[6]]}}</td>
+    <td class="vert" (click)="handleClick(7, [2, 4])">{{playerMarkTypes[gridValue[7]]}}</td>
+    <td (click)="handleClick(8, [2, 5, 6])">{{playerMarkTypes[gridValue[8]]}}</td>
   </tr>
 </table>
 
