@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
     2: 'O'
   };
 
+  rowColLimit = [0, 1, 2];
+
   isDraw: boolean = false;
   isWon: boolean = false;
   

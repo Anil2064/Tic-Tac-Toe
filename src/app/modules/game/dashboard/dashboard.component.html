@@ -3,26 +3,24 @@
 <h1 class="game-text">Player Turn {{playerTurn == 1 ? 'X' : 'O'}}</h1>
 <button class="reset-btn" (click)="resetGame()">Reset Game</button>
 
+<!-- <div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <div class="dropdown-tab" (click)="">3x3</div>
+    <div class="dropdown-tab">4x4</div>
+    <div class="dropdown-tab">5x5</div>
+    <div class="dropdown-tab">6x6</div>
+  </div>
+</div> -->
+
 
 
 
 <h1>Tic Tac Toe</h1>
 <table class="player-mark">
-  <tr>
-    <td (click)="handleClick(0, 0)" class="">{{playerMarkTypes[gridValue[0][0]]}}</td>
-    <td class="vert" (click)="handleClick(0, 1)">{{playerMarkTypes[gridValue[0][1]]}}</td>
-    <td (click)="handleClick(0, 2)">{{playerMarkTypes[gridValue[0][2]]}}</td>
-  </tr>
-  <tr>
-    <td class="hori" (click)="handleClick(1, 0)">{{playerMarkTypes[gridValue[1][0]]}}</td>
-    <td class="vert hori" (click)="handleClick(1, 1)">{{playerMarkTypes[gridValue[1][1]]}}</td>
-    <td class="hori" (click)="handleClick(1, 2)">{{playerMarkTypes[gridValue[1][2]]}}</td>
-  </tr>
-  <tr>
-    <td (click)="handleClick(2, 0)">{{playerMarkTypes[gridValue[2][0]]}}</td>
-    <td class="vert" (click)="handleClick(2, 1)">{{playerMarkTypes[gridValue[2][1]]}}</td>
-    <td (click)="handleClick(2, 2)">{{playerMarkTypes[gridValue[2][2]]}}</td>
-  </tr>
+    <tr *ngFor = "let i of rowColLimit">
+        <td *ngFor = "let j of rowColLimit" (click)="handleClick(i, j)" class="border">{{playerMarkTypes[gridValue[i][j]]}}</td>
+    </tr>
 </table>
 
 <div class="game-text" *ngIf="isWon">{{playerWon == 1 ? 'X' : 'O'}} has won, press reset to play again</div>
