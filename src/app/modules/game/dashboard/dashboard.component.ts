@@ -23,23 +23,14 @@ export class DashboardComponent implements OnInit {
 
   playerWon: number;
 
-  private win = [];
-
   constructor() { }
 
   ngOnInit() {
-    this.win = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
+    this.gridValue = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0]
     ];
-
-    this.gridValue = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   }
 
   /**
@@ -49,50 +40,107 @@ export class DashboardComponent implements OnInit {
     this.isDraw = false;
     this.isWon = false;
     this.playerTurn = 1;
-    this.gridValue = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.gridValue = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ];
   }
 
   /**
    * To check if we have a winner
    * @param playerMark String 'X' or 'O'
    */
-  isWinner(playerMark, gridArr){
+  isWinner(playerMark, row, col){
     let emptyCount = 0;
-    for(let i=0;i<9;i++){
-      if(this.gridValue[i] == 0) emptyCount++;
+
+    for(let i=0;i<3;i++){
+      for(let j=0;j<3;j++){
+        if(this.gridValue[i][j] == 0) emptyCount++;
+      }
     }
 
-    for(let i=0;i<gridArr.length;i++){
-      if(this.gridValue[this.win[gridArr[i]][0]] == playerMark && this.gridValue[this.win[gridArr[i]][1]] == playerMark && this.gridValue[this.win[gridArr[i]][2]] == playerMark){
-        console.log('true');
+    let rowFlag=0;
+    for(let i=0;i<3;i++){ //row
+      if(this.gridValue[row][i] == playerMark){
+        rowFlag++;
+      }
+    }
+
+    if(rowFlag == 3){
+      console.log('row win');
+      this.isWon = true;
+      this.playerWon = playerMark;
+      return true;
+    } 
+
+    let colFlag = 0;
+    for(let i=0;i<3;i++){ //col
+      if(this.gridValue[i][col] == playerMark){
+        colFlag++;
+      }
+    }
+
+    if(colFlag == 3){
+      this.isWon = true;
+      this.playerWon = playerMark;
+      return true;
+    } 
+
+
+    if(row == col){
+      let leftDiaFlag = 0;
+      for(let i=0;i<3;i++){  //let diagonal
+        if(this.gridValue[i][i] == playerMark){
+          leftDiaFlag++;
+        }
+      }
+
+      if(leftDiaFlag == 3){
         this.isWon = true;
         this.playerWon = playerMark;
-        return;
-        // return true;
+        return true;
+      } 
+    
+      let rightDiaFlag=0;
+      let i=0, j=2;
+      while(i<=2 && j>=0){  //right diagonal
+        if(this.gridValue[i][j] == playerMark){
+          rightDiaFlag++;
+        }
+        i++;
+        j--;
       }
+
+      if(rightDiaFlag == 3){
+        this.isWon = true;
+        this.playerWon = playerMark;
+        return true;
+      } 
+
     }
 
     if(emptyCount == 0){
       this.isDraw = true;
     }
-    console.log('false');
-    // return false;
+  
+    return false;
   }
 
   /**
    * To handle click
    * @param gridNum Grid number of game
    */
-  handleClick(gridNum, gridArr){
-    if((!this.isWon) && this.gridValue[gridNum] == 0){
+  handleClick(row, col){
+    if((!this.isWon) && this.gridValue[row][col] == 0){
       if(this.playerTurn == 1){ //for X
-        this.gridValue[gridNum] = 1;
-        this.isWinner(1, gridArr);
+        this.gridValue[row][col] = 1;
+        this.isWinner(1, row, col);
         this.playerTurn = 2
       }
       else{                      // for O
-        this.gridValue[gridNum] = 2;
-        this.isWinner(2, gridArr);
+        this.gridValue[row][col] = 2;
+        this.isWinner(2, row, col);
         this.playerTurn = 1;
       }
     }
